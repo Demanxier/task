@@ -1,5 +1,6 @@
 package com.demanxier.tarefas.model;
 
+import com.demanxier.tarefas.model.enuns.Prioridade;
 import com.demanxier.tarefas.model.enuns.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,9 +27,18 @@ public class Tarefa {
     private LocalDate dataCriacao;
     private LocalDateTime agendamento;
     private LocalDate dataConclusao;
+    private LocalDate dataVencimento;
+    private Double custo;
+    private boolean recorrencia;
 
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    @Enumerated(EnumType.STRING)
+    private Prioridade prioridade;
+
+    @ManyToOne
+    private AreaAtuacao areaAtuacao;
 
     @ManyToOne
     private Usuario usuario;
