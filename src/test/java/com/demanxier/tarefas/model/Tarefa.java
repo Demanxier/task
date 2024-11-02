@@ -2,6 +2,7 @@ package com.demanxier.tarefas.model;
 
 import com.demanxier.tarefas.model.enuns.Prioridade;
 import com.demanxier.tarefas.model.enuns.Status;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,13 +10,14 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
-@Table(name = "tb_tarefa")
+@Data //Getter, Setter, equals(), hashCode() e toString()
+@NoArgsConstructor //Construtor sem argumentos
+@AllArgsConstructor //Construtor que recebe todos os atrubutos
+@Entity //Defini que a classe é uma entidade
+@Table(name = "tb_tarefa") // Define o nome da tabela no Banco de Dados
 public class Tarefa {
 
     @Id
@@ -43,6 +45,11 @@ public class Tarefa {
     @ManyToOne
     private Usuario usuario;
 
-    @OneToMany(mappedBy = "tarefa", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tarefa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Card> cards;
+
+    //CascadeType.All: Significa que se eu alterar a tarefa,vai se recletir a todos os cronogramas relacionados.
+    @OneToMany(mappedBy = "tarefa", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"tarefa"})
+    private List<Cronograma> cronogramas = new ArrayList<>();
 }

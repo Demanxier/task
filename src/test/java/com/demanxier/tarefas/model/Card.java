@@ -1,10 +1,12 @@
 package com.demanxier.tarefas.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -19,8 +21,12 @@ public class Card {
     private Long id;
 
     private String conteudo;
+    private LocalDateTime criadoEm;
+    private LocalDateTime atualizadoEm;
 
     @ManyToOne
+    @JoinColumn(name = "id_tarefa")
+    @JsonBackReference
     private Tarefa tarefa;
 
     @OneToMany(mappedBy = "card", cascade = CascadeType.ALL)

@@ -1,6 +1,5 @@
 package com.demanxier.tarefas.model.form;
 
-import com.demanxier.tarefas.model.Card;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,13 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ArquivoForm {
-
+public class UsuarioLoginForm {
     private String nome;
-    private String tipo;
-
-    private byte[] conteudo;
-
-    private Long id_card;
-    private Card card;
+    private String senha;
 }

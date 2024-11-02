@@ -1,20 +1,16 @@
 package com.demanxier.tarefas.model.form;
 
-import com.demanxier.tarefas.model.Card;
+import com.demanxier.tarefas.model.Tarefa;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ArquivoForm {
-
+public class AreaAtuacaoForm {
     private String nome;
-    private String tipo;
-
-    private byte[] conteudo;
-
-    private Long id_card;
-    private Card card;
+    private List<Tarefa> tarefas;
 }
