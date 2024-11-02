@@ -1,6 +1,6 @@
 ```mermaid
 classDiagram
-    Anotacao {
+   class Anotacao {
         Long id
         String titulo
         String conteudo
@@ -8,12 +8,12 @@ classDiagram
         TipoAnotacao tipoAnotacao
     }
 
-    AreaAtuacao {
+  class AreaAtuacao {
         Long id
         String nome
     }
 
-    Tarefa {
+   class Tarefa {
         Long id
         String titulo
         String descricao
@@ -27,7 +27,7 @@ classDiagram
         Prioridade prioridade
     }
 
-    Usuario {
+  class Usuario {
         Long id
         String nome
         String email
@@ -35,41 +35,41 @@ classDiagram
         NivelAcesso nivelAcesso
     }
 
-    Financa {
+  class Financa {
         Long id
         BigDecimal totalReceita
         BigDecimal totalGasto
     }
 
-    Receita {
+  class Receita {
         Long id
         String descricao
         BigDecimal valor
         LocalDate dataRecebimento
     }
 
-    Gasto {
+  class  Gasto {
         Long id
         String descricao
         BigDecimal valor
         LocalDate dataGasto
     }
 
-    Card {
+  class Card {
         Long id
         String conteudo
         LocalDateTime criadoEm
         LocalDateTime atualizadoEm
     }
 
-    Arquivo {
+  class Arquivo {
         Long id
         String nome
         String tipo
         byte[] conteudo
     }
 
-    Cartao {
+  class Cartao {
         Long id
         String nome
         BigDecimal limite
@@ -77,7 +77,7 @@ classDiagram
         BigDecimal saldoUsado
     }
 
-    Cronograma {
+  class Cronograma {
         Long id
         String titulo
         String descricao
@@ -87,17 +87,17 @@ classDiagram
         Categoria categoria
     }
 
-    AreaAtuacao ||--o{ Tarefa : "tarefas"
-    Tarefa ||--o{ Card : "cards"
-    Tarefa ||--o{ Cronograma : "cronogramas"
-    Usuario ||--o{ Tarefa : "tarefas"
-    Financa ||--o{ Receita : "receitas"
-    Financa ||--o{ Gasto : "gastos"
-    Card ||--o{ Arquivo : "arquivos"
-    Tarefa }o--|| AreaAtuacao : "areaAtuacao"
-    Tarefa }o--|| Usuario : "usuario"
-    Receita }o--|| Financa : "financa"
-    Gasto }o--|| Financa : "financa"
-    Arquivo }o--|| Card : "card"
-    Cronograma }o--|| Tarefa : "tarefa"
+    AreaAtuacao --> Tarefa : OneToMany
+    Tarefa --> Card : OneToMany
+    Tarefa --> Cronograma : OneToMany
+    Usuario --> Tarefa : OneToMany
+    Financa --> Receita : OneToMany
+    Financa --> Gasto : OneToMany
+    Card --> Arquivo : OneToMany
+    Tarefa --> AreaAtuacao : ManyToOne
+    Tarefa --> Usuario : ManyToOne
+    Receita --> Financa : ManyToOne
+    Gasto --> Financa : ManyToOne
+    Arquivo --> Card : ManyToOne
+    Cronograma --> Tarefa : ManyToOne
 ```
