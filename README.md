@@ -1,61 +1,103 @@
 ```mermaid
 classDiagram
-class Usuario {
-        - Long id
-        - String nome
-        - String email
-        - String senha
-        - NivelAcesso nivelAcesso
-        + criarTarefa()
-        + adicionarCard()
-        + alterarStatus()
+    Anotacao {
+        Long id
+        String titulo
+        String conteudo
+        LocalDate dataCriacao
+        TipoAnotacao tipoAnotacao
     }
 
-    class Tarefa {
-        - Long id
-        - String titulo
-        - String descricao
-        - LocalDate dataCriacao
-        - LocalDateTime dataAgendamento
-        - LocalDate dataConclusao
-        - Status status
-        + adicionarCard()
-        + concluir()
+    AreaAtuacao {
+        Long id
+        String nome
     }
 
-    class Card {
-        - Long id
-        - String conteudo
-        - List<Arquivo> arquivos
-        + adicionarArquivo(Arquivo arquivo)
+    Tarefa {
+        Long id
+        String titulo
+        String descricao
+        LocalDate dataCriacao
+        LocalDateTime agendamento
+        LocalDate dataConclusao
+        LocalDate dataVencimento
+        Double custo
+        boolean recorrencia
+        Status status
+        Prioridade prioridade
     }
 
-    class Arquivo {
-        - Long id
-        - String nome
-        - String tipo
-        - byte[] conteudo
+    Usuario {
+        Long id
+        String nome
+        String email
+        String senha
+        NivelAcesso nivelAcesso
     }
 
-    class NivelAcesso {
-        <<enumeration>>
-        ADMIN
-        BASICO
+    Financa {
+        Long id
+        BigDecimal totalReceita
+        BigDecimal totalGasto
     }
 
-    class Status {
-        <<enumeration>>
-        NOVO
-        AGENDADO
-        PAUSADO
-        PENDENTE
-        CONCLUIDO
+    Receita {
+        Long id
+        String descricao
+        BigDecimal valor
+        LocalDate dataRecebimento
     }
 
-    Usuario "1" --> "*" Tarefa : cria
-    Tarefa "1" --> "*" Card : contém
-    Card "1" --> "*" Arquivo : anexa
+    Gasto {
+        Long id
+        String descricao
+        BigDecimal valor
+        LocalDate dataGasto
+    }
 
-    Usuario --> NivelAcesso
-    Tarefa --> Status
+    Card {
+        Long id
+        String conteudo
+        LocalDateTime criadoEm
+        LocalDateTime atualizadoEm
+    }
+
+    Arquivo {
+        Long id
+        String nome
+        String tipo
+        byte[] conteudo
+    }
+
+    Cartao {
+        Long id
+        String nome
+        BigDecimal limite
+        TipoCartao tipoCartao
+        BigDecimal saldoUsado
+    }
+
+    Cronograma {
+        Long id
+        String titulo
+        String descricao
+        LocalDate dataAcao
+        LocalTime horIni
+        LocalTime horFim
+        Categoria categoria
+    }
+
+    AreaAtuacao ||--o{ Tarefa : "tarefas"
+    Tarefa ||--o{ Card : "cards"
+    Tarefa ||--o{ Cronograma : "cronogramas"
+    Usuario ||--o{ Tarefa : "tarefas"
+    Financa ||--o{ Receita : "receitas"
+    Financa ||--o{ Gasto : "gastos"
+    Card ||--o{ Arquivo : "arquivos"
+    Tarefa }o--|| AreaAtuacao : "areaAtuacao"
+    Tarefa }o--|| Usuario : "usuario"
+    Receita }o--|| Financa : "financa"
+    Gasto }o--|| Financa : "financa"
+    Arquivo }o--|| Card : "card"
+    Cronograma }o--|| Tarefa : "tarefa"
 ```
