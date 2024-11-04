@@ -27,3 +27,4 @@ public class Receita {
     @JoinColumn(name = "id_financa")
     private Financa financa;
 }
+

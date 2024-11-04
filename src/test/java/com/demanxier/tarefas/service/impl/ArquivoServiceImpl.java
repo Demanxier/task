@@ -19,18 +19,15 @@ public class ArquivoServiceImpl implements IArquivoService {
     @Autowired
     private CardRepository cardRepository;
 
+
     @Override
-    public Arquivo create(ArquivoForm form){
-        Card card = cardRepository.findById(form.getId_card())
-                .orElseThrow(()-> new RuntimeException("Card não encontrado!"));
-
+    public Arquivo create(ArquivoForm arquivoForm) {
         Arquivo arquivo = new Arquivo();
-        arquivo.setNome(form.getNome());
-        arquivo.setTipo(form.getTipo());
-        arquivo.setConteudo(form.getConteudo());
 
-        arquivo.setCard(card);
-
+        arquivo.setNome(arquivoForm.getNome());
+        arquivo.setConteudo(arquivoForm.getConteudo());
+        arquivo.setCard(arquivoForm.getCard());
+        arquivo.setTipo(arquivoForm.getTipo());
         return arquivoRepository.save(arquivo);
     }
 
@@ -45,13 +42,14 @@ public class ArquivoServiceImpl implements IArquivoService {
     }
 
     @Override
-    public Arquivo update(Long id, ArquivoForm updateForm) {
+    public Arquivo update(Long id, ArquivoForm arquivoForm) {
         Arquivo arquivo = arquivoRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Arquivo não encontrado."));
 
-        arquivo.setNome(updateForm.getNome());
-        arquivo.setTipo(updateForm.getTipo());
-        arquivo.setConteudo(updateForm.getConteudo());
+        arquivo.setNome(arquivoForm.getNome());
+        arquivo.setConteudo(arquivoForm.getConteudo());
+        arquivo.setCard(arquivoForm.getCard());
+        arquivo.setTipo(arquivoForm.getTipo());
 
         return arquivoRepository.save(arquivo);
     }
@@ -60,7 +58,6 @@ public class ArquivoServiceImpl implements IArquivoService {
     public void delete(Long id) {
         Arquivo arquivo = arquivoRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Arquivo não encontrado."));
-
         arquivoRepository.delete(arquivo);
     }
 }

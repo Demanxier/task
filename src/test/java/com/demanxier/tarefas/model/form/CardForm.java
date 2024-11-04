@@ -21,5 +21,6 @@ public class CardForm {
     private Long id_tarefa;
     private Tarefa tarefa;
 
+    private Long id_arquivo;
     private List<Arquivo> arquivos;
 }

@@ -17,5 +17,6 @@ public class AnotacaoForm {
     @NotBlank(message = "O campo CONTEUDO é obrigatório.")
     private String conteudo;
     private LocalDate dataCriacao;
+    private LocalDate dataAtualizacao;
     private TipoAnotacao tipoAnotacao;
 }

@@ -22,6 +22,7 @@ public class Anotacao {
     private String titulo;
     private String conteudo;
     private LocalDate dataCriacao;
+    private LocalDate dataAtualizacao;
 
     @Enumerated(EnumType.STRING)
     private TipoAnotacao tipoAnotacao;
