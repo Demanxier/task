@@ -1,61 +1,103 @@
 ```mermaid
 classDiagram
-class Usuario {
-        - Long id
-        - String nome
-        - String email
-        - String senha
-        - NivelAcesso nivelAcesso
-        + criarTarefa()
-        + adicionarCard()
-        + alterarStatus()
+   class Anotacao {
+        Long id
+        String titulo
+        String conteudo
+        LocalDate dataCriacao
+        TipoAnotacao tipoAnotacao
     }
 
-    class Tarefa {
-        - Long id
-        - String titulo
-        - String descricao
-        - LocalDate dataCriacao
-        - LocalDateTime dataAgendamento
-        - LocalDate dataConclusao
-        - Status status
-        + adicionarCard()
-        + concluir()
+  class AreaAtuacao {
+        Long id
+        String nome
     }
 
-    class Card {
-        - Long id
-        - String conteudo
-        - List<Arquivo> arquivos
-        + adicionarArquivo(Arquivo arquivo)
+   class Tarefa {
+        Long id
+        String titulo
+        String descricao
+        LocalDate dataCriacao
+        LocalDateTime agendamento
+        LocalDate dataConclusao
+        LocalDate dataVencimento
+        Double custo
+        boolean recorrencia
+        Status status
+        Prioridade prioridade
     }
 
-    class Arquivo {
-        - Long id
-        - String nome
-        - String tipo
-        - byte[] conteudo
+  class Usuario {
+        Long id
+        String nome
+        String email
+        String senha
+        NivelAcesso nivelAcesso
     }
 
-    class NivelAcesso {
-        <<enumeration>>
-        ADMIN
-        BASICO
+  class Financa {
+        Long id
+        BigDecimal totalReceita
+        BigDecimal totalGasto
     }
 
-    class Status {
-        <<enumeration>>
-        NOVO
-        AGENDADO
-        PAUSADO
-        PENDENTE
-        CONCLUIDO
+  class Receita {
+        Long id
+        String descricao
+        BigDecimal valor
+        LocalDate dataRecebimento
     }
 
-    Usuario "1" --> "*" Tarefa : cria
-    Tarefa "1" --> "*" Card : contém
-    Card "1" --> "*" Arquivo : anexa
+  class  Gasto {
+        Long id
+        String descricao
+        BigDecimal valor
+        LocalDate dataGasto
+    }
 
-    Usuario --> NivelAcesso
-    Tarefa --> Status
+  class Card {
+        Long id
+        String conteudo
+        LocalDateTime criadoEm
+        LocalDateTime atualizadoEm
+    }
+
+  class Arquivo {
+        Long id
+        String nome
+        String tipo
+        byte[] conteudo
+    }
+
+  class Cartao {
+        Long id
+        String nome
+        BigDecimal limite
+        TipoCartao tipoCartao
+        BigDecimal saldoUsado
+    }
+
+  class Cronograma {
+        Long id
+        String titulo
+        String descricao
+        LocalDate dataAcao
+        LocalTime horIni
+        LocalTime horFim
+        Categoria categoria
+    }
+
+    AreaAtuacao --> Tarefa : OneToMany
+    Tarefa --> Card : OneToMany
+    Tarefa --> Cronograma : OneToMany
+    Usuario --> Tarefa : OneToMany
+    Financa --> Receita : OneToMany
+    Financa --> Gasto : OneToMany
+    Card --> Arquivo : OneToMany
+    Tarefa --> AreaAtuacao : ManyToOne
+    Tarefa --> Usuario : ManyToOne
+    Receita --> Financa : ManyToOne
+    Gasto --> Financa : ManyToOne
+    Arquivo --> Card : ManyToOne
+    Cronograma --> Tarefa : ManyToOne
 ```
