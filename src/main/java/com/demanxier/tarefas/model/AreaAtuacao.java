@@ -1,5 +1,7 @@
 package com.demanxier.tarefas.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +22,7 @@ public class AreaAtuacao {
 
     private String nome;
 
-    @OneToMany(mappedBy = "areaAtuacao", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "areaAtuacao",  fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"tarefa"})
     private List<Tarefa> tarefas;
 }

@@ -20,10 +20,9 @@ public class TarefaForm {
     private String titulo;
 
     @NotBlank(message = "Campo DESCRIÇÃO é obrigatório.")
-    @Size(min = 5, max = 500000, message = "'${validatedValue}' precisa estar entre '${min}' e '${max}'.")
+    @Size(min = 5, max = 1000, message = "'${validatedValue}' precisa estar entre '${min}' e '${max}'.")
     private String descricao;
 
-    @NotBlank(message = "Campo DATA é obrigatório.")
     private LocalDate dataCriacao;
     private LocalDateTime agendamento;
     private LocalDate dataConclusao;

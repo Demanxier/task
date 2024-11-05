@@ -2,6 +2,7 @@ package com.demanxier.tarefas.model;
 
 import com.demanxier.tarefas.model.enuns.Prioridade;
 import com.demanxier.tarefas.model.enuns.Status;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -40,12 +41,17 @@ public class Tarefa {
     private Prioridade prioridade;
 
     @ManyToOne
+    @JoinColumn(name = "id_areaAtuacao")
+    @JsonBackReference
     private AreaAtuacao areaAtuacao;
 
     @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    @JsonBackReference
     private Usuario usuario;
 
     @OneToMany(mappedBy = "tarefa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"tarefa"})
     private List<Card> cards;
 
     //CascadeType.All: Significa que se eu alterar a tarefa,vai se recletir a todos os cronogramas relacionados.

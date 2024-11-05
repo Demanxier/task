@@ -25,7 +25,5 @@ public class UsuarioForm {
     @Size(min = 5, max = 100, message = "'${validatedValue}' precisa estar entre '${min}' e '${max}'.")
     private String senha;
 
-    @NotBlank(message = "Campo NIVELACESSO é obrigatório.")
-    @Size(min = 5, max = 100, message = "'${validatedValue}' precisa estar entre '${min}' e '${max}'.")
     private NivelAcesso nivelAcesso;
 }

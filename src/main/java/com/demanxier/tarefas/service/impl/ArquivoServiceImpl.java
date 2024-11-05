@@ -1,7 +1,6 @@
 package com.demanxier.tarefas.service.impl;
 
 import com.demanxier.tarefas.model.Arquivo;
-import com.demanxier.tarefas.model.Card;
 import com.demanxier.tarefas.model.form.ArquivoForm;
 import com.demanxier.tarefas.repository.ArquivoRepository;
 import com.demanxier.tarefas.repository.CardRepository;
